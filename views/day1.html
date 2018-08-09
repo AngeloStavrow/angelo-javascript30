@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="day1.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fclap.wav?1533222820447"></audio>
+  <audio data-key="83" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fhihat.wav?1533222820076"></audio>
+  <audio data-key="68" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fkick.wav?1533222820351"></audio>
+  <audio data-key="70" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fopenhat.wav?1533222820538"></audio>
+  <audio data-key="71" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fboom.wav?1533222784447"></audio>
+  <audio data-key="72" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fride.wav?1533222820707"></audio>
+  <audio data-key="74" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Fsnare.wav?1533222820820"></audio>
+  <audio data-key="75" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Ftom.wav?1533222821066"></audio>
+  <audio data-key="76" src="https://cdn.glitch.com/d3788ec1-b136-46c5-bf22-b858cdae85a2%2Ftink.wav?1533222820912"></audio>
+
+<script>
+  window.addEventListener('keydown', playSound);
+  
+  function removeTransition(event) {
+    if (event.propertyName !== 'transform') return;  // If there isn't a transform, skip it.
+    this.classList.remove('playing');  // this: the key that's been triggered.
+  }
+  
+  function playSound(event) {
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    if (!audio) return;  // Stop the function if there's no associated audio element on the key.
+    audio.currentTime = 0; // Sets current time to start of wav file on keydown.
+    audio.play();
+    key.classList.add('playing');  // Adds a class to the element.
+  }
+  
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));  // Add transitionend event listener to each key.
+</script>
+
+
+</body>
+</html>
