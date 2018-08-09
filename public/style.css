@@ -1,0 +1,35 @@
+/* styles */
+/* called by your view template */
+@import url(https://cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Code', monospace;
+  margin: 5em auto;
+  max-width: 800px;
+}
+
+h1 {
+  color: #373fff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p {
+  max-width: 800px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid lightgrey;
+}
